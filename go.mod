@@ -1,4 +1,4 @@
-module github.com/qiniu/qmgo
+module gitlab.bianjie.ai/ori/qmgo-fork
 
 go 1.14
 
