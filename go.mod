@@ -1,4 +1,4 @@
-module gitlab.bianjie.ai/ori/qmgo-fork
+module github.com/prolenking/qmgo
 
 go 1.14
 
