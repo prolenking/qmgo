@@ -15,6 +15,7 @@ package qmgo
 
 import (
 	"context"
+	"go.mongodb.org/mongo-driver/mongo/options"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -28,11 +29,12 @@ type Aggregate struct {
 	ctx        context.Context
 	pipeline   interface{}
 	collection *mongo.Collection
+	opts       []*options.AggregateOptions
 }
 
 // All iterates the cursor from aggregate and decodes each document into results.
 func (a *Aggregate) All(results interface{}) error {
-	c, err := a.collection.Aggregate(a.ctx, a.pipeline)
+	c, err := a.collection.Aggregate(a.ctx, a.pipeline, a.opts...)
 	if err != nil {
 		return err
 	}
@@ -41,7 +43,7 @@ func (a *Aggregate) All(results interface{}) error {
 
 // One iterates the cursor from aggregate and decodes current document into result.
 func (a *Aggregate) One(result interface{}) error {
-	c, err := a.collection.Aggregate(a.ctx, a.pipeline)
+	c, err := a.collection.Aggregate(a.ctx, a.pipeline, a.opts...)
 	if err != nil {
 		return err
 	}
